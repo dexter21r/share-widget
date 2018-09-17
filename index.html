@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Share Widget</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <style>
+        #tb-share-dialog {
+            border:1px solid red;
+            overflow: hidden;
+        }
+
+        .tb-share-platform-icon {
+            border:1px solid green;
+            width:100px;
+            height: 100px;
+            overflow: hidden; 
+            float:left; 
+        }
+    </style>
+</head>
+
+<body>
+
+    <span style="cursor:pointer;" class="shareit">
+        <i class="fa fa-share-alt" aria-hidden="true">&nbsp;Share</i>
+    </span>
+
+    <div id="tb-share-dialog" style="display:none;">
+        <i id="tb-share-dialog-close" class="fa fa-times" aria-hidden="true"></i>
+        <div class="tb-share-screen" >
+            <div class="tb-share-platform-icon" data-platform="fb">FB (1,200 x 630)</div>
+            <div class="tb-share-platform-icon" data-platform="in">Instagram (Photo Size: 1080 x 1080)</div>
+            <div class="tb-share-platform-icon" data-platform="tw">Twitter (Minimum 440 x 220 (2:1 Ratio))</div>
+            <div class="tb-share-platform-icon" data-platform="pi">Pintrest (Pins on main page appear as 236 pixels (height is scaled).
+                    Pins on a board appear as 236 pixels (height is scaled).
+                    Expanded pins have a minimum width 600 pixels (height is scaled).
+                    It’s recommended to use an image aspect ratio of 2:3 to 1:3.5)  </div>
+            <div class="tb-share-platform-icon"  data-platform="gp">Google Plus (min 497 x 373)</div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+
+
+        $('.shareit').click(function () {
+            console.log('Share Button Clicked');
+            $('#tb-share-dialog').show();
+        });
+
+        $(document).on( 'click', '#tb-share-dialog-close', function(){
+            $('#tb-share-dialog').hide();
+        });
+
+        
+    </script>
+</body>
+
+</html>
