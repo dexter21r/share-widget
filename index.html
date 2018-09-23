@@ -81,6 +81,17 @@
             overflow: auto;
             border:2px solid purple;
         }
+
+        #tb-bg-search-results{
+            overflow: auto;
+        }
+
+        .tb-search-items {
+            height:100px;
+            border:1px solid red;
+            display: inline-block;
+            cursor: pointer;
+        }
         
     </style>
 </head>
@@ -125,7 +136,11 @@
             </div>
             <div class="tb-card-footer">
                 <div class="tb-share-control-container">
-                    controls...
+                    <input type="search" id="tb-txtsearch" name="txtsearch" placeholder="Search Background Image..." />
+                    <button type="submit" id="tb-btnsearch" >Search</button>
+                    <div id="tb-bg-search-results">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,6 +204,34 @@
             resetZoom();
         });
 
+        $(document).on('click','.tb-search-items', function () {
+            console.log('image clicked');
+        });
+
+        $(document).on('click','#tb-btnsearch', function () {
+            var searchTerm = $('#tb-txtsearch').val();
+            console.log('Search',searchTerm);
+
+            if(searchTerm && searchTerm.length > 3){
+                console.log('Search it');
+                $.ajax({
+                    url: 'https://pixabay.com/api/?key=8510374-bb2dde0f12fe24760279b11f9&image_type=photo&per_page=50&q='+encodeURI(searchTerm),
+                    success: function(data) {
+                        console.log(data);
+                        var images = data.hits;
+                        var searchHtml = '';
+                        images.forEach(function(item){
+                            searchHtml += '<div class="tb-search-items"><img src="'+item.previewURL+'" /></div>'
+                        })
+                        $('#tb-bg-search-results').html(searchHtml);
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            }
+        });
+
         $(document).on('click', '.tb-share-platform-icon', function () {
             console.log($(this).data('platform'));
             $('#tb-share-platform-card').hide();
@@ -250,19 +293,22 @@
                 function (img) {
                     backgroundImage = img;
                     console.log('Image width: ' + (width / img.width ) + 'Image height: ' + img.height);
-                    var oImg = backgroundImage.set({
-                        left: 0,
-                        top: 0,
-                        angle: 0,
-                        width: width,
-                        height: height,
-                        // scaleX: width / img.width, // Mobileview
-                        // scaleY:  height / img.height// Mobileview
+                    // var oImg = backgroundImage.set({
+                    //     // left: 0,
+                    //     // top: 0,
+                    //     // angle: 0,
+                    //     // width: width,
+                    //     // height: height,
+                    //     // scaleX: width / img.width, // Mobileview
+                    //     // scaleY:  height / img.height// Mobileview
+                    // });
+                    canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas),{
+                        scaleX: canvas.width / backgroundImage.width,
+                        scaleY: canvas.height / backgroundImage.height
                     });
-                    canvas.setBackgroundImage(oImg, canvas.renderAll.bind(canvas));
 
-                    canvas.backgroundImageStretch = true;
-                    canvas.renderAll();
+                    //canvas.backgroundImageStretch = true;
+                    //canvas.renderAll();
                     // canvas.backgroundImageStretch = true;
                     console.log('==> backgroud loaded');
                     // var dataURL = canvas.toDataURL({
