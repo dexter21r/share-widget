@@ -9,7 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Bitter|Bree+Serif|Caveat|Coiny|Dancing+Script|Indie+Flower|Josefin+Sans|Josefin+Slab|Lato|Libre+Baskerville|Lobster|Lobster+Two|Lora|Monoton|Montserrat|Open+Sans|Oxygen|Poiret+One|Raleway|Righteous|Varela+Round"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
     <style>
         .canvas-container {
             margin: auto;
@@ -18,8 +18,8 @@
         #tb-share-dialog {
             border: 1px solid red;
             overflow: hidden;
-            width: 950px;
-            height: 600px;
+            width: 900px;
+            /* height: 680px; */
             margin: auto;
         }
 
@@ -84,13 +84,26 @@
 
         #tb-bg-search-results{
             overflow: auto;
+            white-space: nowrap;
         }
 
         .tb-search-items {
-            height:100px;
             border:1px solid red;
             display: inline-block;
             cursor: pointer;
+            position: relative;
+        }
+
+        .tb-search-image-source {
+            width: 50px;
+        }
+
+        .tb-search-image-source-link{
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background-color: rgba(255,255,255,0.5);
+            padding: 0px 2px;
         }
         
     </style>
@@ -137,7 +150,7 @@
             <div class="tb-card-footer">
                 <div class="tb-share-control-container">
                     <input type="search" id="tb-txtsearch" name="txtsearch" placeholder="Search Background Image..." />
-                    <button type="submit" id="tb-btnsearch" >Search</button>
+                    <button type="submit" id="tb-btnsearch">Search</button>
                     <div id="tb-bg-search-results">
 
                     </div>
@@ -171,16 +184,18 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.6/fabric.min.js" crossorigin="anonymous"></script>
+    <script src="centering_guidelines.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
     <script>
         var canvas;
-        var scaleX, scaleY, textArea, brand;
+        var scaleX, scaleY, textArea, textArea2, brand;
         var totalAssets = 3;
         var loadedAssets = 0;
         var canvasScale = 1;
         var SCALE_FACTOR = 1.2;
         var backgroundImage = '';
         var panning = false;
+        var orientation = 'horizontal';
 
         //$('.shareit').click(function () {
         console.log('Share Button Clicked');
@@ -204,28 +219,33 @@
             resetZoom();
         });
 
-        $(document).on('click','.tb-search-items', function () {
+        $(document).on('click', '.tb-search-items', function () {
             console.log('image clicked');
         });
 
-        $(document).on('click','#tb-btnsearch', function () {
+        $(document).on('click', '#tb-btnsearch', function () {
             var searchTerm = $('#tb-txtsearch').val();
-            console.log('Search',searchTerm);
+            console.log('Search', searchTerm);
 
-            if(searchTerm && searchTerm.length > 3){
+            if (searchTerm && searchTerm.length > 3) {
                 console.log('Search it');
                 $.ajax({
-                    url: 'https://pixabay.com/api/?key=8510374-bb2dde0f12fe24760279b11f9&image_type=photo&per_page=50&q='+encodeURI(searchTerm),
-                    success: function(data) {
+                    url: 'https://pixabay.com/api/?safesearch=true&key=8510374-bb2dde0f12fe24760279b11f9&image_type=photo&per_page=50&orientation=' +
+                        orientation + '&q=' + encodeURI(searchTerm),
+                    success: function (data) {
                         console.log(data);
                         var images = data.hits;
                         var searchHtml = '';
-                        images.forEach(function(item){
-                            searchHtml += '<div class="tb-search-items"><img src="'+item.previewURL+'" /></div>'
+                        images.forEach(function (item) {
+                            searchHtml += '<div class="tb-search-items">\n\
+                                    <a target="_blank" href="' + item.pageURL +'" class="tb-search-image-source-link">\n\
+                                    <img class="tb-search-image-source"  src="pixabay.svg" /></a>\n\
+                                    <img class="tb-search-image-preview" src="' + item.previewURL +'" />\n\
+                                </div>';
                         })
                         $('#tb-bg-search-results').html(searchHtml);
                     },
-                    error: function(error){
+                    error: function (error) {
                         console.log(error);
                     }
                 });
@@ -256,6 +276,7 @@
                 case 'pi':
                     width = 600;
                     height = 900;
+                    orientation = 'vertical';
                     break;
                 case 'gp':
                     width = 1024;
@@ -277,11 +298,13 @@
             canvas.setWidth(width);
             canvas.setHeight(height);
 
-            var deviceHeight = $('#tb-share-dialog').height() * 70 / 100;//480; //;262.5;
+            // initCenteringGuidelines(canvas);
+
+            var deviceHeight = 600 * 70 / 100; //480; //;262.5;
             var deviceWidth = width * deviceHeight / height;
 
-            $('.tb-canvas-scroll').height(deviceHeight+10);
-            console.log('Width: ' + deviceWidth,' DH '+$('#tb-share-dialog').height());
+            $('.tb-canvas-scroll').height(deviceHeight + 10);
+            console.log('Width: ' + deviceWidth);
             console.log('Height: ' + deviceHeight);
             scaleX = (deviceWidth / width);
             scaleY = (deviceHeight / height);
@@ -292,7 +315,7 @@
                 'http://www.qygjxz.com/data/out/129/4777797-images-wallpaper.jpeg',
                 function (img) {
                     backgroundImage = img;
-                    console.log('Image width: ' + (width / img.width ) + 'Image height: ' + img.height);
+                    console.log('Image width: ' + (width / img.width) + 'Image height: ' + img.height);
                     // var oImg = backgroundImage.set({
                     //     // left: 0,
                     //     // top: 0,
@@ -302,7 +325,7 @@
                     //     // scaleX: width / img.width, // Mobileview
                     //     // scaleY:  height / img.height// Mobileview
                     // });
-                    canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas),{
+                    canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas), {
                         scaleX: canvas.width / backgroundImage.width,
                         scaleY: canvas.height / backgroundImage.height
                     });
@@ -318,7 +341,8 @@
                     loadedAssets++;
                     checkAssetsLoading();
                 });
-            console.log((canvas.getWidth() * scaleX) - 100);
+
+            // Add Brand Name 
             brand = new fabric.Text('ThoughtsBee.com', {
                 left: canvas.getWidth() - 160,
                 top: 5,
@@ -326,9 +350,11 @@
                 fontFamily: 'Josefin Slab',
                 textAlign: 'center',
                 fontWeight: "bold",
-                fill: 'red',
+                fill: '#fff',
                 borderColor: "#CCC",
-                selectable: false
+                selectable: false,
+                stroke: 'rgba(255, 255, 255,0.5)',
+                strokeWidth: 0.2,
                 // lineHeight: ta.defaultSettings.lineHeight,
                 // fontFamily: ta.defaultSettings.fontFamily,
             });
@@ -336,28 +362,30 @@
             canvas.add(brand);
             loadedAssets++;
             checkAssetsLoading();
+            // ------
 
-            textArea = new fabric.Textbox('This is text area', {
-                left: 50,
-                top: 50,
-                width: 300,
-                height: 250,
-                stroke: 'rgba(0,0,0,0.5)',
-                strokeWidth: 0.2,
-                fontSize: 48,
-                fontFamily: 'Lobster Two',
-                textAlign: 'center',
-                // fontWeight: "bold",
-                textDecoration: "normal",
-                fontStyle: "normal",
-                fill: 'yellow',
-                borderColor: "#CCC",
-                // lineHeight: ta.defaultSettings.lineHeight,
-                // fontFamily: ta.defaultSettings.fontFamily,
-            });
+            textArea = new fabric.Textbox(
+                'To accomplish great things, we must not only act, but also dream; not only plan, but also believe.', {
+                    width: canvas.getWidth() - 200,
+                    stroke: 'rgba(0,0,0,0.5)',
+                    strokeWidth: 0.2,
+                    fontSize: 48,
+                    fontFamily: 'Lobster Two',
+                    textAlign: 'center',
+                    // fontWeight: "bold",
+                    textDecoration: "normal",
+                    fontStyle: "normal",
+                    fill: 'yellow',
+                    borderColor: "#CCC",
+                    editable: false,
+                    // lineHeight: ta.defaultSettings.lineHeight,
+                    // fontFamily: ta.defaultSettings.fontFamily,
+                });
             textArea._forceClearCache = true;
 
             textArea.set({
+                left: (canvas.getWidth() / 2) - (textArea.width / 2),
+                top: ((canvas.getHeight() / 2) - (textArea.height / 2)),
                 borderDashArray: [2, 2],
                 cornerColor: 'white',
                 cornerStrokeColor: 'black',
@@ -373,6 +401,46 @@
             });
 
             canvas.add(textArea);
+            loadedAssets++;
+            checkAssetsLoading();
+
+            textArea2 = new fabric.Textbox('- Author Name', {
+                width: 200,
+                height: 150,
+                stroke: 'rgba(0,0,0,0.5)',
+                strokeWidth: 0.2,
+                fontSize: 22,
+                fontFamily: 'Bitter',
+                textAlign: 'center',
+                // fontWeight: "bold",
+                textDecoration: "normal",
+                fontStyle: "normal",
+                fill: '#fff',
+                borderColor: "#CCC",
+                editable: false,
+                // lineHeight: ta.defaultSettings.lineHeight,
+                // fontFamily: ta.defaultSettings.fontFamily,
+            });
+            textArea2._forceClearCache = true;
+
+            textArea2.set({
+                left: (canvas.getWidth() / 2) - (textArea2.width / 2),
+                top: textArea.top + textArea.height + 50,
+                borderDashArray: [2, 2],
+                cornerColor: 'white',
+                cornerStrokeColor: 'black',
+                cornerStyle: 'circle',
+                cornerSize: 12,
+                padding: 15,
+                transparentCorners: false,
+                borderScaleFactor: 2
+            });
+
+            textArea2.on("changed", function (e) {
+                //console.log('textchanges',e);
+            });
+
+            canvas.add(textArea2);
             loadedAssets++;
             checkAssetsLoading();
 
@@ -396,7 +464,6 @@
             //         //canvas.relativePan(delta);
             //     }
             // });
-
 
         });
 
@@ -576,8 +643,6 @@
 
             canvasScale = 1;
         }
-
-
     </script>
 </body>
 
