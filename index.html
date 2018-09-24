@@ -9,14 +9,17 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Bitter|Bree+Serif|Caveat|Coiny|Dancing+Script|Indie+Flower|Josefin+Sans|Josefin+Slab|Lato|Libre+Baskerville|Lobster|Lobster+Two|Lora|Monoton|Montserrat|Open+Sans|Oxygen|Poiret+One|Raleway|Righteous|Varela+Round"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+    <link rel="stylesheet" href="color-picker/palette-color-picker.css">
     <style>
         .canvas-container {
             margin: auto;
         }
 
         #tb-share-dialog {
-            border: 1px solid red;
+            border: 1px solid rgb(15, 15, 15);
             overflow: hidden;
             width: 900px;
             /* height: 680px; */
@@ -33,8 +36,14 @@
         }
 
         .tb-share-dialog-close {
-            cursor: pointer;
             float: right;
+        }
+
+        .tb-share-control {
+            padding: 2px 5px;
+            border: 1px solid #929292;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
         .tb-share-dialog-back {
@@ -57,7 +66,7 @@
         }
 
         .tb-share-dialog-box {
-            border: 2px solid red;
+            /* border: 2px solid red; */
         }
 
         .tb-card-header {
@@ -79,33 +88,33 @@
 
         .tb-canvas-scroll {
             overflow: auto;
-            border:2px solid purple;
+            border: 2px solid purple;
         }
 
-        #tb-bg-search-results{
+        #tb-bg-search-results {
             overflow: auto;
             white-space: nowrap;
         }
 
         .tb-search-items {
-            border:1px solid red;
+            border: 1px solid #e2e2e2;
             display: inline-block;
             cursor: pointer;
             position: relative;
+            margin: 5px;
         }
 
         .tb-search-image-source {
             width: 50px;
         }
 
-        .tb-search-image-source-link{
+        .tb-search-image-source-link {
             position: absolute;
             bottom: 5px;
             left: 5px;
-            background-color: rgba(255,255,255,0.5);
+            background-color: rgba(255, 255, 255, 0.5);
             padding: 0px 2px;
         }
-        
     </style>
 </head>
 
@@ -119,7 +128,7 @@
 
         <div id="tb-share-platform-card" class="tb-card">
             <div class="tb-card-header">
-                <i class="fa fa-times tb-share-dialog-close" aria-hidden="true"></i>
+                <i class="fa fa-times tb-share-dialog-close tb-share-control" aria-hidden="true"></i>
             </div>
             <div class="tb-card-content">
                 <div class="tb-share-platform-list">
@@ -136,11 +145,18 @@
 
         <div id="tb-share-canvas-card" style="display:none;">
             <div class="tb-card-header">
-                <i class="fa fa-times tb-share-dialog-close" aria-hidden="true"></i>
-                <i class="fa fa-arrow-left tb-share-dialog-back" aria-hidden="true"></i>
-                <button id="btnZoomIn">ZoomIn</button>
-                <button id="btnZoomOut">ZoomOut</button>
-                <button id="btnResetZoom">Reset Zoom</button>
+                <i class="fa fa-times tb-share-dialog-close tb-share-control" aria-hidden="true"></i>
+                <i class="fa fa-arrow-left tb-share-dialog-back tb-share-control" aria-hidden="true"></i>
+
+                <i id="btnZoomIn" class="fas fa-search-plus tb-share-control"></i>
+                <i id="btnZoomOut" class="fas fa-search-minus tb-share-control"></i>
+                <i id="btnResetZoom" class="tb-share-control">Reset Zoom</i>
+                <input type="text" id="color-picker" name="color-picker">
+                <span id="tb-share-text-controls" style="display:none;">
+                    <select>
+                        <option></option>
+                    </select>
+                </span>
             </div>
             <div class="tb-card-content tb-canvas-scroll" data-simplebar>
                 <div class="tb-share-canvas-container">
@@ -186,7 +202,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.6/fabric.min.js" crossorigin="anonymous"></script>
     <script src="centering_guidelines.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
+    <script src="color-picker/palette-color-picker.min.js"></script>
     <script>
+
+        $('#color-picker').paletteColorPicker({
+            colors: ['#D50000','#304FFE','#00B8D4','#69F0AE','#FFFF00','#F8BBD0'],
+            clear_btn: null
+        });
+
+
         var canvas;
         var scaleX, scaleY, textArea, textArea2, brand;
         var totalAssets = 3;
@@ -221,6 +245,30 @@
 
         $(document).on('click', '.tb-search-items', function () {
             console.log('image clicked');
+            var imageUrl = $(this).data('url');
+            $.ajax({
+                url: 'tb-share-widget.php',
+                type: 'POST',
+                data: {
+                    action: 'save-image',
+                    imageurl: imageUrl
+                },
+                success: function (res) {
+                    console.log(res);
+                    fabric.Image.fromURL(res.data, function (img) {
+                        backgroundImage = img;
+                        canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(
+                            canvas), {
+                            scaleX: canvas.width / backgroundImage.width,
+                            scaleY: canvas.height / backgroundImage.height
+                        });
+                    });
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         });
 
         $(document).on('click', '#tb-btnsearch', function () {
@@ -230,17 +278,28 @@
             if (searchTerm && searchTerm.length > 3) {
                 console.log('Search it');
                 $.ajax({
-                    url: 'https://pixabay.com/api/?safesearch=true&key=8510374-bb2dde0f12fe24760279b11f9&image_type=photo&per_page=50&orientation=' +
-                        orientation + '&q=' + encodeURI(searchTerm),
-                    success: function (data) {
-                        console.log(data);
-                        var images = data.hits;
+                    url: 'tb-share-widget.php',
+                    type: 'POST',
+                    data: {
+                        action: 'search',
+                        searchterm: searchTerm,
+                        orientation: orientation
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        var images = res.data;
                         var searchHtml = '';
                         images.forEach(function (item) {
-                            searchHtml += '<div class="tb-search-items">\n\
-                                    <a target="_blank" href="' + item.pageURL +'" class="tb-search-image-source-link">\n\
+                            searchHtml +=
+                                '<div class="tb-search-items" data-url="' + item.largeImageURL +
+                                '">\n\
+                                    <a target="_blank" href="' +
+                                item.pageURL +
+                                '" class="tb-search-image-source-link">\n\
                                     <img class="tb-search-image-source"  src="pixabay.svg" /></a>\n\
-                                    <img class="tb-search-image-preview" src="' + item.previewURL +'" />\n\
+                                    <img class="tb-search-image-preview" src="' +
+                                item.previewURL +
+                                '" />\n\
                                 </div>';
                         })
                         $('#tb-bg-search-results').html(searchHtml);
@@ -259,11 +318,12 @@
 
             var width = 1024;
             var height = 1024;
+            orientation = 'horizontal';
             var platform = $(this).data('platform');
             switch (platform) {
                 case 'fb':
-                    width = 1200;
-                    height = 630;
+                    width = 940;
+                    height = 788;
                     break;
                 case 'in':
                     width = 1080;
@@ -343,7 +403,7 @@
                 });
 
             // Add Brand Name 
-            brand = new fabric.Text('ThoughtsBee.com', {
+            brand = new fabric.Text('site.com', {
                 left: canvas.getWidth() - 160,
                 top: 5,
                 fontSize: 21,
@@ -444,26 +504,21 @@
             loadedAssets++;
             checkAssetsLoading();
 
-            // canvas.on('mouse:up', function (e) {
-            //     console.log('Mouse up');
-            //     panning = false;
-            // });
-            // canvas.on('mouse:out', function (e) {
-            //     console.log('Mouse out');
-            //     panning = false;
-            // });
-            // canvas.on('mouse:down', function (e) {
-            //     console.log('Mouse down');
-            //     panning = true;
-            // });
-            // canvas.on('mouse:move', function (e) {
-            //     console.log('Mouse move');
-            //     //allowing pan only if the image is zoomed.
-            //     if (panning && e && e.e) {
-            //         //var delta = new fabric.Point(e.e.movementX, e.e.movementY);
-            //         //canvas.relativePan(delta);
-            //     }
-            // });
+            canvas.on("mouse:up", function (e) {
+                //console.log(e);
+                if (e.target != null) {
+                    var type = e.target.get('type');
+                    if (type == 'textbox') {
+                        console.log('textbox');
+                        $('#tb-share-text-controls').show();
+                    } else if (type == 'path-group') {
+
+                    } 
+
+                } else {
+                    $('#tb-share-text-controls').hide();
+                }
+            });
 
         });
 
