@@ -153,8 +153,28 @@
                 <i id="btnResetZoom" class="tb-share-control">Reset Zoom</i>
                 <input type="text" id="color-picker" name="color-picker">
                 <span id="tb-share-text-controls" style="display:none;">
-                    <select>
-                        <option></option>
+                    <select id="tb-color-pallate" onChange="applyStyle('font-family', this.value, 'selection')">
+                        <option style="font-size: 20px; font-family: 'Lato', sans-serif;" value="'Lato', sans-serif">Lato</option>
+                        <option style="font-size: 20px; font-family: 'Open Sans', sans-serif;" value="'Open Sans', sans-serif">Open Sans</option>
+                        <option style="font-size: 20px; font-family: 'Montserrat', sans-serif;" value="'Montserrat', sans-serif">Montserrat</option>
+                        <option style="font-size: 20px; font-family: 'Raleway', sans-serif;" value="'Raleway', sans-serif">Raleway</option>
+                        <option style="font-size: 20px; font-family: 'Lora', serif;" value="'Lora', serif">Lora</option>
+                        <option style="font-size: 20px; font-family: 'Indie Flower', cursive;" value="'Indie Flower', cursive">Indie Flower</option>
+                        <option style="font-size: 20px; font-family: 'Oxygen', sans-serif;" value="'Oxygen', sans-serif">Oxygen</option>
+                        <option style="font-size: 20px; font-family: 'Bitter', serif;" value="'Bitter', serif">Bitter</option>
+                        <option style="font-size: 20px; font-family: 'Josefin Sans', sans-serif;" value="'Josefin Sans', sans-serif">Josefin Sans</option>
+                        <option style="font-size: 20px; font-family: 'Josefin Slab', sans-serif;" value="'Josefin Slab', sans-serif">Josefin Slab</option>
+                        <option style="font-size: 20px; font-family: 'Libre Baskerville', serif;" value="'Libre Baskerville', serif">Libre Baskerville</option>
+                        <option style="font-size: 20px; font-family: 'Lobster', cursive;" value="'Lobster', cursive">Lobster</option>
+                        <option style="font-size: 20px; font-family: 'Varela Round', sans-serif;" value="'Varela Round', sans-serif">Varela Round</option>
+                        <option style="font-size: 20px; font-family: 'Dancing Script', cursive;" value="'Dancing Script', cursive">Dancing Script</option>
+                        <option style="font-size: 20px; font-family: 'Bree Serif', serif;" value="'Bree Serif', serif">Bree Serif</option>
+                        <option style="font-size: 20px; font-family: 'Coiny', cursive;" value="'Coiny', cursive">Coiny</option>
+                        <option style="font-size: 20px; font-family: 'Righteous', cursive;" value="'Righteous', cursive">Righteous</option>
+                        <option style="font-size: 20px; font-family: 'Poiret One', cursive;" value="'Poiret One', cursive">Poiret One</option>
+                        <option style="font-size: 20px; font-family: 'Caveat', cursive;" value="'Caveat', cursive">Caveat</option>
+                        <option style="font-size: 20px; font-family: 'Monoton', cursive;" value="'Monoton', cursive">Monoton</option>
+                        <option style="font-size: 20px; font-family: 'Lobster Two', cursive;" value="'Lobster Two', cursive">Lobster Two</option>
                     </select>
                 </span>
             </div>
@@ -172,6 +192,54 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="text-formatting-id" class="text-formatting-div" style="display:block;z-index: 999999;">
+        <div style="display:block;overflow: hidden;margin-bottom: 15px;">
+            <a title="Delete Textbox" href="#" id="deleteItem" class=" btn btn-danger pull-right">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="text-alignment-div m-top20">
+            <h6>Alignment</h6>
+            <div class="alignment-div">
+                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'left', 'selection')">
+                    <i id="txt-align-left" class="fa fa-align-left text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'center', 'selection')">
+                    <i id="txt-align-center" class="fa fa-align-center text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'right', 'selection')">
+                    <i id="txt-align-right" class="fa fa-align-right text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+            </div>
+        </div>
+        <div class="text-size m-top20">
+            <h6>Size</h6>
+            <p class="range-field">
+                <input id="txt-font-size" type="range" min="10" max="72" step="1" value="14" data-style="font-size" data-apply="all">
+                <output id="out-font-size" name="rangeVal">14</output>
+            </p>
+        </div>
+        <div class="text-letter-height m-top20">
+            <h6>Text Decoration</h6>
+            <p class="range-field">
+                <!--                            <input id="btn-underline" type="button" matTooltip="Underline" class="btn" id="underline" onClick="applyStyle('text-decoration', 'underline', 'selection')"
+                           value="Underline" />
+                    <input id="btn-bold" type="button" id="bold" class="btn" onClick="applyStyle('font-weight', 'bold', 'selection')" value="Bold" />
+                    <input id="btn-italic" type="button" id="italic" class="btn" onClick="applyStyle('font-style', 'italic', 'selection')" value="Italic" />-->
+
+                <a style="cursor:pointer;" onClick="applyStyle('text-decoration', 'underline', 'selection')">
+                    <i id="txt-underline" class="fa fa-underline text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+                <a style="cursor:pointer;" onClick="applyStyle('font-weight', 'bold', 'selection')">
+                    <i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+                <a style="cursor:pointer;" onClick="applyStyle('font-style', 'italic', 'selection')">
+                    <i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
+                </a>
+            </p>
         </div>
     </div>
 
@@ -204,12 +272,36 @@
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
     <script src="color-picker/palette-color-picker.min.js"></script>
     <script>
-
         $('#color-picker').paletteColorPicker({
-            colors: ['#D50000','#304FFE','#00B8D4','#69F0AE','#FFFF00','#F8BBD0'],
+            colors: ['#D50000', '#304FFE', '#00B8D4', '#69F0AE', '#FFFF00', '#F8BBD0'],
             clear_btn: null
         });
 
+        var textAreaStyle = {
+            fontSize: 11,
+            lineHeight: 1,
+            fontFamily: 'Wonderbar',
+            textAlign: 'left',
+            fontWeight: "",
+            textDecoration: "",
+            fontStyle: "",
+            fill: '#00000',
+            charSpacing: 1
+        };
+
+        var styleObj = {
+            'border-color': 'borderColor',
+            'font-size': 'fontSize',
+            'font-family': 'fontFamily',
+            'text-align': 'textAlign',
+            'font-style': 'fontStyle',
+            'letter-spacing': 'charSpacing',
+            'line-height': 'lineHeight',
+            'bg-color': 'textBackgroundColor',
+            'font-color': 'fill',
+            'font-weight': 'fontWeight',
+            'text-decoration': 'textDecoration'
+        };
 
         var canvas;
         var scaleX, scaleY, textArea, textArea2, brand;
@@ -511,9 +603,22 @@
                     if (type == 'textbox') {
                         console.log('textbox');
                         $('#tb-share-text-controls').show();
+                        textAreaStyle = {
+                            fontSize: e.target.fontSize,
+                            lineHeight: e.target.lineHeight,
+                            fontFamily: e.target.fontFamily,
+                            textAlign: e.target.textAlign,
+                            fontWeight: e.target.fontWeight !== undefined ? e.target.fontWeight : "normal",
+                            textDecoration: e.target.textDecoration,
+                            fontStyle: e.target.fontStyle !== undefined ? e.target.fontStyle : "normal",
+                            fill: e.target.fill,
+                            charSpacing: e.target.charSpacing !== undefined ? e.target.charSpacing : 1
+                        };
+
+                        setFormattingValues();
                     } else if (type == 'path-group') {
 
-                    } 
+                    }
 
                 } else {
                     $('#tb-share-text-controls').hide();
@@ -697,6 +802,166 @@
             canvas.renderAll();
 
             canvasScale = 1;
+        }
+
+
+
+        function setFormattingValues() {
+
+            $('#tb-color-pallate').val(textAreaStyle.fontFamily);
+            $('#txt-font-size').val(textAreaStyle.fontSize);
+            $('#out-font-size').html(textAreaStyle.fontSize);
+            $('#txt-letter-spacing').val(textAreaStyle.charSpacing);
+            $('#out-letter-spacing').html(textAreaStyle.charSpacing);
+            $('#txt-line-height').val(textAreaStyle.lineHeight);
+            $('#out-line-height').html(textAreaStyle.lineHeight);
+
+            if (textAreaStyle.fontWeight === 'bold') {
+                $('#txt-bold').addClass('active');
+            } else {
+                $('#txt-bold').removeClass('active');
+            }
+
+            if (textAreaStyle.fontStyle === 'italic') {
+                $('#txt-italic').addClass('active');
+            } else {
+                $('#txt-italic').removeClass('active');
+            }
+
+            if (textAreaStyle.textDecoration === 'underline') {
+                $('#txt-underline').addClass('active');
+            } else {
+                $('#txt-underline').removeClass('active');
+            }
+
+            if (textAreaStyle.textAlign === 'left') {
+                $('#txt-align-left').addClass('active');
+                $('#txt-align-center').removeClass('active');
+                $('#txt-align-right').removeClass('active');
+            } else if (textAreaStyle.textAlign === 'center') {
+                $('#txt-align-left').removeClass('active');
+                $('#txt-align-center').addClass('active');
+                $('#txt-align-right').removeClass('active');
+            } else if (textAreaStyle.textAlign === 'right') {
+                $('#txt-align-left').removeClass('active');
+                $('#txt-align-center').removeClass('active');
+                $('#txt-align-right').addClass('active');
+            }
+
+            // var col = textAreaStyle.fill;
+            // var colName = getColorNameFromCode(col);
+            // pk.setColor(col, colName);
+            // wrapperEl.style.backgroundColor = col;
+
+            // col = textAreaStyle.borderColor;
+            // colName = getColorNameFromCode(col);
+            // pkBorder.setColor(col, colName);
+            // wrapperElBorder.style.backgroundColor = col;
+
+        }
+
+        function applyStyle(styleName, styleValue, styleType) {
+            var obj;
+            if (obj = getActiveObject()) {
+                //console.log('Apply Style',obj.getSelectionStyles(),obj.selectionStart ,obj.selectionEnd,obj );
+                styleName = styleObj[styleName];
+
+                if (styleName != undefined) {
+                    console.log(styleName + ' ==> ' + styleValue);
+                    if (styleType === 'selection') {
+                        var isAlreadyApplied = (getStyle(obj, styleName) || '').indexOf(styleValue) > -1;
+                        styleValue = isAlreadyApplied ? '' : styleValue;
+                        setStyle(obj, styleName, styleValue);
+                    } else {
+                        setStyle(obj, styleName, styleValue);
+                    }
+                    setActiveStyle(styleName, styleValue);
+                    refresh();
+                } else {
+                    console.log('Invalid Style: ' + styleName);
+                }
+
+
+            } else {
+                console.log('Object not selected');
+            }
+        }
+
+        function setActiveStyle(styleName, styleValue) {
+
+            switch (styleName) {
+                case 'fontSize':
+                    this.textAreaStyle.fontSize = styleValue;
+                    break;
+                case 'fontFamily':
+                    this.textAreaStyle.fontFamily = styleValue;
+                    break;
+                case 'textAlign':
+                    this.textAreaStyle.textAlign = styleValue;
+                    break;
+                case 'fontStyle':
+                    this.textAreaStyle.fontStyle = styleValue;
+                    break;
+                case 'charSpacing':
+                    this.textAreaStyle.charSpacing = styleValue;
+                    break;
+                case 'lineHeight':
+                    this.textAreaStyle.lineHeight = styleValue;
+                    break;
+                case 'borderColor':
+                    this.textAreaStyle.borderColor = styleValue;
+                    break;
+                case 'fill':
+                    this.textAreaStyle.fill = styleValue;
+                    break;
+                case 'fontWeight':
+                    this.textAreaStyle.fontWeight = styleValue;
+                    break;
+                case 'textDecoration':
+                    this.textAreaStyle.textDecoration = styleValue;
+                    break;
+                default:
+                    console.log('Sorry, we are out of ' + styleName + '.');
+            }
+
+            setFormattingValues();
+        }
+
+        function getActiveObject() {
+            if (canvas) {
+                return canvas.getActiveObject();
+            }
+            return false;
+        }
+
+        function setStyle(object, styleName, value) {
+
+            if (object.setSelectionStyles && object.isEditing) {
+                var style = {};
+                style[styleName] = value;
+                object.setSelectionStyles(style);
+            } else {
+                if (styleName == 'fill') {
+                    object.setColor(value);
+                } else {
+                    object[styleName] = value;
+                }
+                object.set({
+                    dirty: true
+                });
+            }
+        }
+
+        function getStyle(object, styleName) {
+            return (object.getSelectionStyles && object.isEditing) ?
+                object.getSelectionStyles()[styleName] :
+                object[styleName];
+        }
+
+        function refresh() {
+            console.log('template updated');
+            canvas.renderAll();
+            canvas.renderAll.bind(canvas);
         }
     </script>
 </body>
