@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
-    <link rel="stylesheet" href="color-picker/palette-color-picker.css">
+    <link rel="stylesheet" href="./color-picker/colorPick.css">
     <style>
         .canvas-container {
             margin: auto;
@@ -115,6 +115,21 @@
             background-color: rgba(255, 255, 255, 0.5);
             padding: 0px 2px;
         }
+
+        .colorPickSelector {
+            border-radius: 5px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: inline-block;
+            -webkit-transition: all linear .2s;
+            -moz-transition: all linear .2s;
+            -ms-transition: all linear .2s;
+            -o-transition: all linear .2s;
+            transition: all linear .2s;
+        }
+
+        .colorPickSelector:hover { transform: scale(1.1); }
     </style>
 </head>
 
@@ -149,10 +164,17 @@
                 <i class="fa fa-arrow-left tb-share-dialog-back tb-share-control" aria-hidden="true"></i>
 
                 <i id="btnZoomIn" class="fas fa-search-plus tb-share-control"></i>
+
                 <i id="btnZoomOut" class="fas fa-search-minus tb-share-control"></i>
+
                 <i id="btnResetZoom" class="tb-share-control">Reset Zoom</i>
-                <input type="text" id="color-picker" name="color-picker">
+
+                
+
                 <span id="tb-share-text-controls" style="display:none;">
+
+                        <div id="tb-color-picker" class="colorPickSelector"></div>
+
                     <select id="tb-color-pallate" onChange="applyStyle('font-family', this.value, 'selection')">
                         <option style="font-size: 20px; font-family: 'Lato', sans-serif;" value="'Lato', sans-serif">Lato</option>
                         <option style="font-size: 20px; font-family: 'Open Sans', sans-serif;" value="'Open Sans', sans-serif">Open Sans</option>
@@ -176,7 +198,73 @@
                         <option style="font-size: 20px; font-family: 'Monoton', cursive;" value="'Monoton', cursive">Monoton</option>
                         <option style="font-size: 20px; font-family: 'Lobster Two', cursive;" value="'Lobster Two', cursive">Lobster Two</option>
                     </select>
+                    <select id="tb-font-size" onChange="applyStyle('font-size', this.value)">
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                        <option value="34">34</option>
+                        <option value="36">36</option>
+                        <option value="38">38</option>
+                        <option value="40">40</option>
+                        <option value="42">42</option>
+                        <option value="44">44</option>
+                        <option value="46">46</option>
+                        <option value="48">48</option>
+                        <option value="50">50</option>
+                        <option value="52">52</option>
+                        <option value="54">54</option>
+                        <option value="56">56</option>
+                        <option value="58">58</option>
+                        <option value="60">60</option>
+                        <option value="62">62</option>
+                        <option value="64">64</option>
+                        <option value="66">66</option>
+                        <option value="68">68</option>
+                        <option value="70">70</option>
+                        <option value="72">72</option>
+                        <option value="74">74</option>
+                        <option value="76">76</option>
+                        <option value="78">78</option>
+                        <option value="80">80</option>
+                        <option value="82">82</option>
+                        <option value="84">84</option>
+                        <option value="86">86</option>
+                        <option value="88">88</option>
+                        <option value="90">90</option>
+                        <option value="92">92</option>
+                        <option value="94">94</option>
+                        <option value="96">96</option>
+                        <option value="98">98</option>
+                        <option value="100">100</option>
+                        <option value="102">102</option>
+                        <option value="104">104</option>
+                        <option value="106">106</option>
+                        <option value="108">108</option>
+                    </select>
+                    <span class="alignment-div">
+                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'center', 'selection')">
+                            <i id="txt-align-left" class="fa fa-align-left text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                        </a>
+                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'right', 'selection')">
+                            <i id="txt-align-center" class="fa fa-align-center text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                        </a>
+                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'left', 'selection')">
+                            <i id="txt-align-right" class="fa fa-align-right text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                        </a>
+                    </span>
+                    <a style="cursor:pointer;" onClick="applyStyle('font-weight', 'bold', 'selection')">
+                        <i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                    </a>
+                    <a style="cursor:pointer;" onClick="applyStyle('font-style', 'italic', 'selection')">
+                        <i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                    </a>
                 </span>
+
             </div>
             <div class="tb-card-content tb-canvas-scroll" data-simplebar>
                 <div class="tb-share-canvas-container">
@@ -192,54 +280,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="text-formatting-id" class="text-formatting-div" style="display:block;z-index: 999999;">
-        <div style="display:block;overflow: hidden;margin-bottom: 15px;">
-            <a title="Delete Textbox" href="#" id="deleteItem" class=" btn btn-danger pull-right">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-            </a>
-        </div>
-        <div class="text-alignment-div m-top20">
-            <h6>Alignment</h6>
-            <div class="alignment-div">
-                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'left', 'selection')">
-                    <i id="txt-align-left" class="fa fa-align-left text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'center', 'selection')">
-                    <i id="txt-align-center" class="fa fa-align-center text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'right', 'selection')">
-                    <i id="txt-align-right" class="fa fa-align-right text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-            </div>
-        </div>
-        <div class="text-size m-top20">
-            <h6>Size</h6>
-            <p class="range-field">
-                <input id="txt-font-size" type="range" min="10" max="72" step="1" value="14" data-style="font-size" data-apply="all">
-                <output id="out-font-size" name="rangeVal">14</output>
-            </p>
-        </div>
-        <div class="text-letter-height m-top20">
-            <h6>Text Decoration</h6>
-            <p class="range-field">
-                <!--                            <input id="btn-underline" type="button" matTooltip="Underline" class="btn" id="underline" onClick="applyStyle('text-decoration', 'underline', 'selection')"
-                           value="Underline" />
-                    <input id="btn-bold" type="button" id="bold" class="btn" onClick="applyStyle('font-weight', 'bold', 'selection')" value="Bold" />
-                    <input id="btn-italic" type="button" id="italic" class="btn" onClick="applyStyle('font-style', 'italic', 'selection')" value="Italic" />-->
-
-                <a style="cursor:pointer;" onClick="applyStyle('text-decoration', 'underline', 'selection')">
-                    <i id="txt-underline" class="fa fa-underline text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-                <a style="cursor:pointer;" onClick="applyStyle('font-weight', 'bold', 'selection')">
-                    <i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-                <a style="cursor:pointer;" onClick="applyStyle('font-style', 'italic', 'selection')">
-                    <i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:24px;padding:15px;"></i>
-                </a>
-            </p>
         </div>
     </div>
 
@@ -270,12 +310,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.6/fabric.min.js" crossorigin="anonymous"></script>
     <script src="centering_guidelines.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
-    <script src="color-picker/palette-color-picker.min.js"></script>
+    <script src="./color-picker/colorPick.js"></script>
     <script>
-        $('#color-picker').paletteColorPicker({
-            colors: ['#D50000', '#304FFE', '#00B8D4', '#69F0AE', '#FFFF00', '#F8BBD0'],
-            clear_btn: null
+
+        var colorPicker = null;
+
+        $(".colorPickSelector").colorPick({
+            'initialColor' : '#27ae60',
+            'onColorSelected': function() {
+                colorPicker = this;
+                console.log("The user has selected the color: " + this.color)
+                this.element.css({'backgroundColor': this.color, 'color': this.color});
+                applyStyle('font-color', this.color)
+            }
         });
+
+        
 
         var textAreaStyle = {
             fontSize: 11,
@@ -519,8 +569,8 @@
             textArea = new fabric.Textbox(
                 'To accomplish great things, we must not only act, but also dream; not only plan, but also believe.', {
                     width: canvas.getWidth() - 200,
-                    stroke: 'rgba(0,0,0,0.5)',
-                    strokeWidth: 0.2,
+                    // stroke: 'rgba(0,0,0,0.5)',
+                    // strokeWidth: 0.2,
                     fontSize: 48,
                     fontFamily: 'Lobster Two',
                     textAlign: 'center',
@@ -546,6 +596,11 @@
                 padding: 15,
                 transparentCorners: false,
                 borderScaleFactor: 2
+            });
+
+            textArea.setControlsVisibility({
+                mt: false,
+                mb: false,
             });
 
             textArea.on("changed", function (e) {
@@ -612,7 +667,8 @@
                             textDecoration: e.target.textDecoration,
                             fontStyle: e.target.fontStyle !== undefined ? e.target.fontStyle : "normal",
                             fill: e.target.fill,
-                            charSpacing: e.target.charSpacing !== undefined ? e.target.charSpacing : 1
+                            charSpacing: e.target.charSpacing !== undefined ? e.target.charSpacing :
+                                1
                         };
 
                         setFormattingValues();
@@ -809,12 +865,7 @@
         function setFormattingValues() {
 
             $('#tb-color-pallate').val(textAreaStyle.fontFamily);
-            $('#txt-font-size').val(textAreaStyle.fontSize);
-            $('#out-font-size').html(textAreaStyle.fontSize);
-            $('#txt-letter-spacing').val(textAreaStyle.charSpacing);
-            $('#out-letter-spacing').html(textAreaStyle.charSpacing);
-            $('#txt-line-height').val(textAreaStyle.lineHeight);
-            $('#out-line-height').html(textAreaStyle.lineHeight);
+            $('#tb-font-size').val(textAreaStyle.fontSize);
 
             if (textAreaStyle.fontWeight === 'bold') {
                 $('#txt-bold').addClass('active');
@@ -835,18 +886,24 @@
             }
 
             if (textAreaStyle.textAlign === 'left') {
-                $('#txt-align-left').addClass('active');
-                $('#txt-align-center').removeClass('active');
-                $('#txt-align-right').removeClass('active');
+                $('#txt-align-left').show();
+                $('#txt-align-center').hide();
+                $('#txt-align-right').hide();
             } else if (textAreaStyle.textAlign === 'center') {
-                $('#txt-align-left').removeClass('active');
-                $('#txt-align-center').addClass('active');
-                $('#txt-align-right').removeClass('active');
+                $('#txt-align-left').hide();
+                $('#txt-align-center').show();
+                $('#txt-align-right').hide();
             } else if (textAreaStyle.textAlign === 'right') {
-                $('#txt-align-left').removeClass('active');
-                $('#txt-align-center').removeClass('active');
-                $('#txt-align-right').addClass('active');
+                $('#txt-align-left').hide();
+                $('#txt-align-center').hide();
+                $('#txt-align-right').show();
             }
+
+            colorPicker.color = textAreaStyle.fill;
+            colorPicker.element.val(colorPicker.color);
+            colorPicker.element.css({'backgroundColor': colorPicker.color, 'color': colorPicker.color});
+            console.log(colorPicker);
+            //$.proxy(colorPicker.options.onColorSelected, colorPicker)();
 
             // var col = textAreaStyle.fill;
             // var colName = getColorNameFromCode(col);
