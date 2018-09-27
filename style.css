@@ -1,0 +1,116 @@
+.canvas-container {
+            margin: auto;
+        }
+
+        #tb-share-dialog {
+            border: 1px solid rgb(15, 15, 15);
+            overflow: hidden;
+            width: 900px;
+            /* height: 680px; */
+            margin: auto;
+        }
+
+        .tb-share-platform-icon {
+            border: 1px solid green;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tb-share-dialog-close {
+            float: right;
+        }
+
+        .tb-share-control {
+            padding: 2px 5px;
+            border: 1px solid #929292;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .tb-share-dialog-back {
+            cursor: pointer;
+        }
+
+        #tb-share-canvas {
+            margin: auto;
+            border: 1px solid violet;
+        }
+
+        .tb-share-canvas-container {
+            border: 2px solid yellow;
+            overflow: auto;
+            margin: auto;
+        }
+
+        .tb-share-control-container {
+            border: 1px solid yellow;
+        }
+
+        .tb-share-dialog-box {
+            /* border: 2px solid red; */
+        }
+
+        .tb-card-header {
+            overflow: hidden;
+            border: 1px solid red;
+        }
+
+        .tb-card-content {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid blue;
+        }
+
+        .tb-card-footer {
+            overflow: hidden;
+            border: 1px solid red;
+            text-align: center;
+        }
+
+        .tb-canvas-scroll {
+            overflow: auto;
+            border: 2px solid purple;
+        }
+
+        #tb-bg-search-results {
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+        .tb-search-items {
+            border: 1px solid #e2e2e2;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            margin: 5px;
+        }
+
+        .tb-search-image-source {
+            width: 50px;
+        }
+
+        .tb-search-image-source-link {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 0px 2px;
+        }
+
+        .colorPickSelector {
+            border-radius: 5px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: inline-block;
+            -webkit-transition: all linear .2s;
+            -moz-transition: all linear .2s;
+            -ms-transition: all linear .2s;
+            -o-transition: all linear .2s;
+            transition: all linear .2s;
+        }
+
+        .colorPickSelector:hover { transform: scale(1.1); }
