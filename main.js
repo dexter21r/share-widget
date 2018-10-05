@@ -1,3 +1,53 @@
+
+var fontSizeOptions = '';
+
+for (var fs = 12; fs < 110; fs+=2) {
+    fontSizeOptions += '<option value="'+fs+'">'+fs+'</option>';
+}
+
+$('#tb-font-size').html(fontSizeOptions);
+
+var fontFamilyArray = [
+    'Lato',
+    'Open Sans',
+    'Montserrat',
+    'Raleway',
+    'Lora',
+    'Indie Flower',
+    'Oxygen',
+    'Bitter',
+    'Josefin Sans',
+    'Josefin Slab',
+    'Libre Baskerville',
+    'Lobster',
+    'Varela Round',
+    'Dancing Script',
+    'Bree Serif',
+    'Coiny',
+    'Righteous',
+    'Poiret One',
+    'Caveat',
+    'Monoton',
+    'Lobster Two'
+];
+
+var fontFamilyOptions = '';
+
+fontFamilyArray.forEach(function(ff){
+    var font = ff;
+    var myfont = new FontFaceObserver(font)
+    myfont.load()
+      .then(function () {
+        console.log(':::: FONT LOADED :::: ' + font);
+      }).catch(function (e) {
+        console.log(e)
+        console.log('font loading failed ' + font);
+      });
+    fontFamilyOptions += '<option style="font-size: 20px; font-family: \''+ff+'\', sans-serif;" value="\''+ff+'\', sans-serif">'+ff+'</option>';
+})
+
+$('#tb-color-pallate').html(fontFamilyOptions);
+
 var colorPicker = null;
 
 $(".colorPickSelector").colorPick({
@@ -12,6 +62,8 @@ $(".colorPickSelector").colorPick({
         applyStyle('font-color', this.color)
     }
 });
+
+
 
 var textAreaStyle = {
     fontSize: 11,

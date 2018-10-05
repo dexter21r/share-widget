@@ -114,3 +114,10 @@
         }
 
         .colorPickSelector:hover { transform: scale(1.1); }
+
+        #tb-share-text-controls {
+            position: absolute;
+            z-index: 99;
+            background-color: #fff;
+            border: 1px solid;
+        }

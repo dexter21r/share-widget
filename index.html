@@ -53,111 +53,48 @@
 
                 <i id="btnResetZoom" class="tb-share-control">Reset Zoom</i>
 
+
+
                 
-
-                <span id="tb-share-text-controls" style="display:none;">
-
-                        <div id="tb-color-picker" class="colorPickSelector"></div>
-
-                    <select id="tb-color-pallate" onChange="applyStyle('font-family', this.value, 'selection')">
-                        <option style="font-size: 20px; font-family: 'Lato', sans-serif;" value="'Lato', sans-serif">Lato</option>
-                        <option style="font-size: 20px; font-family: 'Open Sans', sans-serif;" value="'Open Sans', sans-serif">Open Sans</option>
-                        <option style="font-size: 20px; font-family: 'Montserrat', sans-serif;" value="'Montserrat', sans-serif">Montserrat</option>
-                        <option style="font-size: 20px; font-family: 'Raleway', sans-serif;" value="'Raleway', sans-serif">Raleway</option>
-                        <option style="font-size: 20px; font-family: 'Lora', serif;" value="'Lora', serif">Lora</option>
-                        <option style="font-size: 20px; font-family: 'Indie Flower', cursive;" value="'Indie Flower', cursive">Indie Flower</option>
-                        <option style="font-size: 20px; font-family: 'Oxygen', sans-serif;" value="'Oxygen', sans-serif">Oxygen</option>
-                        <option style="font-size: 20px; font-family: 'Bitter', serif;" value="'Bitter', serif">Bitter</option>
-                        <option style="font-size: 20px; font-family: 'Josefin Sans', sans-serif;" value="'Josefin Sans', sans-serif">Josefin Sans</option>
-                        <option style="font-size: 20px; font-family: 'Josefin Slab', sans-serif;" value="'Josefin Slab', sans-serif">Josefin Slab</option>
-                        <option style="font-size: 20px; font-family: 'Libre Baskerville', serif;" value="'Libre Baskerville', serif">Libre Baskerville</option>
-                        <option style="font-size: 20px; font-family: 'Lobster', cursive;" value="'Lobster', cursive">Lobster</option>
-                        <option style="font-size: 20px; font-family: 'Varela Round', sans-serif;" value="'Varela Round', sans-serif">Varela Round</option>
-                        <option style="font-size: 20px; font-family: 'Dancing Script', cursive;" value="'Dancing Script', cursive">Dancing Script</option>
-                        <option style="font-size: 20px; font-family: 'Bree Serif', serif;" value="'Bree Serif', serif">Bree Serif</option>
-                        <option style="font-size: 20px; font-family: 'Coiny', cursive;" value="'Coiny', cursive">Coiny</option>
-                        <option style="font-size: 20px; font-family: 'Righteous', cursive;" value="'Righteous', cursive">Righteous</option>
-                        <option style="font-size: 20px; font-family: 'Poiret One', cursive;" value="'Poiret One', cursive">Poiret One</option>
-                        <option style="font-size: 20px; font-family: 'Caveat', cursive;" value="'Caveat', cursive">Caveat</option>
-                        <option style="font-size: 20px; font-family: 'Monoton', cursive;" value="'Monoton', cursive">Monoton</option>
-                        <option style="font-size: 20px; font-family: 'Lobster Two', cursive;" value="'Lobster Two', cursive">Lobster Two</option>
-                    </select>
-                    <select id="tb-font-size" onChange="applyStyle('font-size', this.value)">
-                        <option value="18">18</option>
-                        <option value="20">20</option>
-                        <option value="22">22</option>
-                        <option value="24">24</option>
-                        <option value="26">26</option>
-                        <option value="28">28</option>
-                        <option value="30">30</option>
-                        <option value="32">32</option>
-                        <option value="34">34</option>
-                        <option value="36">36</option>
-                        <option value="38">38</option>
-                        <option value="40">40</option>
-                        <option value="42">42</option>
-                        <option value="44">44</option>
-                        <option value="46">46</option>
-                        <option value="48">48</option>
-                        <option value="50">50</option>
-                        <option value="52">52</option>
-                        <option value="54">54</option>
-                        <option value="56">56</option>
-                        <option value="58">58</option>
-                        <option value="60">60</option>
-                        <option value="62">62</option>
-                        <option value="64">64</option>
-                        <option value="66">66</option>
-                        <option value="68">68</option>
-                        <option value="70">70</option>
-                        <option value="72">72</option>
-                        <option value="74">74</option>
-                        <option value="76">76</option>
-                        <option value="78">78</option>
-                        <option value="80">80</option>
-                        <option value="82">82</option>
-                        <option value="84">84</option>
-                        <option value="86">86</option>
-                        <option value="88">88</option>
-                        <option value="90">90</option>
-                        <option value="92">92</option>
-                        <option value="94">94</option>
-                        <option value="96">96</option>
-                        <option value="98">98</option>
-                        <option value="100">100</option>
-                        <option value="102">102</option>
-                        <option value="104">104</option>
-                        <option value="106">106</option>
-                        <option value="108">108</option>
-                    </select>
-                    <span class="alignment-div">
-                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'center', 'selection')">
-                            <i id="txt-align-left" class="fa fa-align-left text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
-                        </a>
-                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'right', 'selection')">
-                            <i id="txt-align-center" class="fa fa-align-center text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
-                        </a>
-                        <a style="cursor:pointer;" onClick="applyStyle('text-align', 'left', 'selection')">
-                            <i id="txt-align-right" class="fa fa-align-right text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
-                        </a>
-                    </span>
-                    <a style="cursor:pointer;" onClick="applyStyle('font-weight', 'bold', 'selection')">
-                        <i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
-                    </a>
-                    <a style="cursor:pointer;" onClick="applyStyle('font-style', 'italic', 'selection')">
-                        <i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
-                    </a>
-                </span>
 
             </div>
             <div class="tb-card-content tb-canvas-scroll" data-simplebar>
                 <div class="tb-share-canvas-container">
+                        <div id="tb-share-text-controls" style="display:none;">
+                                
+                            <div id="tb-color-picker" class="colorPickSelector"></div>
+        
+                            <select id="tb-color-pallate" onChange="applyStyle('font-family', this.value, 'selection')">
+                            </select>
+        
+                            <select id="tb-font-size" onChange="applyStyle('font-size', this.value)">
+                            </select>
+        
+                            <span class="alignment-div">
+                                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'center', 'selection')">
+                                    <i id="txt-align-left" class="fa fa-align-left text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                                </a>
+                                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'right', 'selection')">
+                                    <i id="txt-align-center" class="fa fa-align-center text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                                </a>
+                                <a style="cursor:pointer;" onClick="applyStyle('text-align', 'left', 'selection')">
+                                    <i id="txt-align-right" class="fa fa-align-right text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                                </a>
+                            </span>
+                            <a style="cursor:pointer;" onClick="applyStyle('font-weight', 'bold', 'selection')">
+                                <i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                            </a>
+                            <a style="cursor:pointer;" onClick="applyStyle('font-style', 'italic', 'selection')">
+                                <i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>
+                            </a>
+                        </div>
+                        
                     <canvas id="tb-share-canvas"></canvas>
                 </div>
             </div>
 
             <input class="tb-share-bg-color-picker">
-            
+
             <div class="tb-card-footer">
                 <div class="tb-share-control-container">
                     <input type="search" id="tb-txtsearch" name="txtsearch" placeholder="Search Background Image..." />
@@ -170,31 +107,10 @@
         </div>
     </div>
 
-    <div style="font-family: 'Lato', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Open Sans', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Montserrat', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Raleway', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Lora', serif;">&nbsp;</div>
-    <div style="font-family: 'Indie Flower', cursive;">&nbsp;</div>
-    <div style="font-family: 'Oxygen', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Bitter', serif;">&nbsp;</div>
-    <div style="font-family: 'Josefin Sans', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Josefin Slab', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Libre Baskerville', serif;">&nbsp;</div>
-    <div style="font-family: 'Lobster', cursive;">&nbsp;</div>
-    <div style="font-family: 'Varela Round', sans-serif;">&nbsp;</div>
-    <div style="font-family: 'Dancing Script', cursive;">&nbsp;</div>
-    <div style="font-family: 'Bree Serif', serif;">&nbsp;</div>
-    <div style="font-family: 'Coiny', cursive;">&nbsp;</div>
-    <div style="font-family: 'Righteous', cursive;">&nbsp;</div>
-    <div style="font-family: 'Poiret One', cursive;">&nbsp;</div>
-    <div style="font-family: 'Caveat', cursive;">&nbsp;</div>
-    <div style="font-family: 'Monoton', cursive;">&nbsp;</div>
-    <div style="font-family: 'Lobster Two', cursive;">&nbsp;</div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.6/fabric.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontfaceobserver/2.0.13/fontfaceobserver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" crossorigin="anonymous"></script>
     <script src="centering_guidelines.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
     <script src="./color-picker/colorPick.js"></script>
