@@ -86,6 +86,9 @@
             cursor: pointer;
             position: relative;
             margin: 5px;
+            height: 100px;
+            overflow: hidden;
+            background-color: #ededed;
         }
 
         .tb-search-image-source {

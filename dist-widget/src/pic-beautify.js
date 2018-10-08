@@ -1,0 +1,110 @@
+import $ from 'jquery';
+
+export default class PicBeautify {
+
+  isDailogOpen = false;
+
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    let initHtml = '<div id="#livedigi-pic-beautify-widget">' + this.getPluginHtml() + '</div>';
+
+    $('body').append(initHtml);
+  }
+
+  getPluginHtml() {
+
+    return '<div class="tb-share-dialog-box" id="tb-share-dialog" style="display:none;">' +
+      '' +
+      '<div id="tb-share-platform-card" class="tb-card">' +
+      '<div class="tb-card-header">' +
+      '<i class="fa fa-times tb-share-dialog-close tb-share-control" aria-hidden="true"></i>' +
+      '</div>' +
+      '<div class="tb-card-content">' +
+      '<div class="tb-share-platform-list">' +
+      '<div class="tb-share-platform-icon" data-platform="ge">General </div>' +
+      '<div class="tb-share-platform-icon" data-platform="fb">FB </div>' +
+      '<div class="tb-share-platform-icon" data-platform="in">Instagram </div>' +
+      '<div class="tb-share-platform-icon" data-platform="tw">Twitter</div>' +
+      '<div class="tb-share-platform-icon" data-platform="pi">Pintrest</div>' +
+      '<div class="tb-share-platform-icon" data-platform="gp">Google Plus</div>' +
+      '</div>' +
+      '</div>' +
+      '<div class="tb-card-footer">Card Footer</div>' +
+      '</div>' +
+      '' +
+      '<div id="tb-share-canvas-card" style="display:none;">' +
+      '<div class="tb-card-header">' +
+      '<i class="fa fa-times tb-share-dialog-close tb-share-control" aria-hidden="true"></i>' +
+      '<i class="fa fa-arrow-left tb-share-dialog-back tb-share-control" aria-hidden="true"></i>' +
+      '' +
+      '<i id="btnZoomIn" class="fas fa-search-plus tb-share-control"></i>' +
+      '' +
+      '<i id="btnZoomOut" class="fas fa-search-minus tb-share-control"></i>' +
+      '' +
+      '<i id="btnResetZoom" class="tb-share-control">Reset Zoom</i>' +
+      '' +
+      '' +
+      '' +
+      '' +
+      '' +
+      '</div>' +
+      '<div class="tb-card-content tb-canvas-scroll" data-simplebar>' +
+      '<div class="tb-share-canvas-container">' +
+      '<div id="tb-share-text-controls" style="display:none;">' +
+      '' +
+      '<div id="tb-color-picker" class="colorPickSelector"></div>' +
+      '' +
+      '<select id="tb-color-pallate" onChange="applyStyle(\'font-family\', this.value, \'selection\')">' +
+      '</select>' +
+      '' +
+      '<select id="tb-font-size" onChange="applyStyle(\'font-size\', this.value)">' +
+      '</select>' +
+      '' +
+      '<span class="alignment-div">' +
+      '<a style="cursor:pointer;" onClick="applyStyle(\'text-align\', \'center\', \'selection\')">' +
+      '<i id="txt-align-left" class="fa fa-align-left text-style" style="font-size:14px;margin:10px;"></i>' +
+      '</a>' +
+      '<a style="cursor:pointer;" onClick="applyStyle(\'text-align\', \'right\', \'selection\')">' +
+      '<i id="txt-align-center" class="fa fa-align-center text-style" style="font-size:14px;margin:10px;"></i>' +
+      '</a>' +
+      '<a style="cursor:pointer;" onClick="applyStyle(\'text-align\', \'left\', \'selection\')">' +
+      '<i id="txt-align-right" class="fa fa-align-right text-style" style="font-size:14px;margin:10px;"></i>' +
+      '</a>' +
+      '</span>' +
+      '<a style="cursor:pointer;" onClick="applyStyle(\'font-weight\', \'bold\', \'selection\')">' +
+      '<i id="txt-bold" class="fa fa-bold text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>' +
+      '</a>' +
+      '<a style="cursor:pointer;" onClick="applyStyle(\'font-style\', \'italic\', \'selection\')">' +
+      '<i id="txt-italic" class="fa fa-italic text-style" aria-hidden="true" style="font-size:14px;margin:10px;"></i>' +
+      '</a>' +
+      '</div>' +
+      '' +
+      '<canvas id="tb-share-canvas"></canvas>' +
+      '</div>' +
+      '</div>' +
+      '' +
+      '<input class="tb-share-bg-color-picker">' +
+      '' +
+      '<div class="tb-card-footer">' +
+      '<div class="tb-share-control-container">' +
+      '<input type="search" id="tb-txtsearch" name="txtsearch" placeholder="Search Background Image..." />' +
+      '<button type="submit" id="tb-btnsearch">Search</button>' +
+      '<div id="tb-bg-search-results">' +
+      '' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+
+  }
+
+  openPicBeautifyDailog() {
+    this.isDailogOpen = true;
+    $('#tb-share-dialog').show();
+  }
+
+}

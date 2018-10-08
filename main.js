@@ -97,7 +97,7 @@ var totalAssets = 3;
 var loadedAssets = 0;
 var canvasScale = 1;
 var SCALE_FACTOR = 1.2;
-var backgroundImage = '';
+var backgroundImage = null;
 var panning = false;
 var orientation = 'horizontal';
 

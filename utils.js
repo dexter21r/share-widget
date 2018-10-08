@@ -69,11 +69,13 @@ function zoomIn() {
         objects[i].setCoords();
     }
 
-    var oImg = backgroundImage.set({
-        scaleX: backgroundImage.scaleX * SCALE_FACTOR,
-        scaleY: backgroundImage.scaleY * SCALE_FACTOR
-    });
-    canvas.setBackgroundImage(oImg);
+    if(canvas.backgroundImage) {
+        var oImg = backgroundImage.set({
+            scaleX: backgroundImage.scaleX * SCALE_FACTOR,
+            scaleY: backgroundImage.scaleY * SCALE_FACTOR
+        });
+        canvas.setBackgroundImage(oImg);
+    }
 
     $('.tb-share-canvas-container').css({
         width: canvas.getWidth() + 5,
@@ -112,11 +114,13 @@ function zoomOut() {
         objects[i].setCoords();
     }
 
-    var oImg = backgroundImage.set({
-        scaleX: backgroundImage.scaleX / SCALE_FACTOR,
-        scaleY: backgroundImage.scaleY / SCALE_FACTOR
-    });
-    canvas.setBackgroundImage(oImg);
+    if(canvas.backgroundImage) {
+        var oImg = backgroundImage.set({
+            scaleX: backgroundImage.scaleX / SCALE_FACTOR,
+            scaleY: backgroundImage.scaleY / SCALE_FACTOR
+        });
+        canvas.setBackgroundImage(oImg);
+    }
 
     $('.tb-share-canvas-container').css({
         width: canvas.getWidth() + 5,
@@ -152,11 +156,13 @@ function resetZoom() {
         objects[i].setCoords();
     }
 
-    var oImg = backgroundImage.set({
-        scaleX: backgroundImage.scaleX * (1 / canvasScale),
-        scaleY: backgroundImage.scaleY * (1 / canvasScale)
-    });
-    canvas.setBackgroundImage(oImg);
+    if(canvas.backgroundImage) {
+        var oImg = backgroundImage.set({
+            scaleX: backgroundImage.scaleX * (1 / canvasScale),
+            scaleY: backgroundImage.scaleY * (1 / canvasScale)
+        });
+        canvas.setBackgroundImage(oImg);
+    }
 
     $('.tb-share-canvas-container').css({
         width: canvas.getWidth() + 5,
