@@ -69,7 +69,7 @@ function zoomIn() {
         objects[i].setCoords();
     }
 
-    if(canvas.backgroundImage) {
+    if (canvas.backgroundImage) {
         var oImg = backgroundImage.set({
             scaleX: backgroundImage.scaleX * SCALE_FACTOR,
             scaleY: backgroundImage.scaleY * SCALE_FACTOR
@@ -114,7 +114,7 @@ function zoomOut() {
         objects[i].setCoords();
     }
 
-    if(canvas.backgroundImage) {
+    if (canvas.backgroundImage) {
         var oImg = backgroundImage.set({
             scaleX: backgroundImage.scaleX / SCALE_FACTOR,
             scaleY: backgroundImage.scaleY / SCALE_FACTOR
@@ -156,7 +156,7 @@ function resetZoom() {
         objects[i].setCoords();
     }
 
-    if(canvas.backgroundImage) {
+    if (canvas.backgroundImage) {
         var oImg = backgroundImage.set({
             scaleX: backgroundImage.scaleX * (1 / canvasScale),
             scaleY: backgroundImage.scaleY * (1 / canvasScale)
@@ -215,7 +215,10 @@ function setFormattingValues() {
 
     colorPicker.color = textAreaStyle.fill;
     colorPicker.element.val(colorPicker.color);
-    colorPicker.element.css({'backgroundColor': colorPicker.color, 'color': colorPicker.color});
+    colorPicker.element.css({
+        'backgroundColor': colorPicker.color,
+        'color': colorPicker.color
+    });
     console.log(colorPicker);
     //$.proxy(colorPicker.options.onColorSelected, colorPicker)();
 
@@ -333,4 +336,16 @@ function refresh() {
     console.log('template updated');
     canvas.renderAll();
     canvas.renderAll.bind(canvas);
+}
+
+function applyFilter(filter) {
+    console.log(canvas.backgroundImage.filters);
+    if (canvas.backgroundImage) {
+        canvas.backgroundImage.filters[0] = filter;
+        canvas.backgroundImage.applyFilters();
+
+        setTimeout(function() {
+            refresh();
+        }, 200);
+    }
 }

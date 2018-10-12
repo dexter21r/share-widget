@@ -124,3 +124,23 @@
             background-color: #fff;
             border: 1px solid;
         }
+
+        .tb-search-tag-item {
+            padding: 2px 5px;
+            border: 1px solid #babbba;
+            border-radius: 10px;
+            display: inline-block;
+            text-transform: capitalize;
+            font-size: 12px;
+            margin: 2px 2px;
+            cursor: pointer;
+            color: #333333;
+        }
+
+        .tb-share-bg-filter-item {
+            border: 1px solid red;
+            padding: 10px 10px;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }

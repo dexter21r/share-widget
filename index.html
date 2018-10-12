@@ -64,7 +64,7 @@
                                 
                             <div id="tb-color-picker" class="colorPickSelector"></div>
         
-                            <select id="tb-color-pallate" onChange="applyStyle('font-family', this.value, 'selection')">
+                            <select id="tb-font-family" onChange="applyStyle('font-family', this.value, 'selection')">
                             </select>
         
                             <select id="tb-font-size" onChange="applyStyle('font-size', this.value)">
@@ -93,10 +93,14 @@
                 </div>
             </div>
 
-            <input class="tb-share-bg-color-picker">
+            <input class="tb-share-bg-color-picker" />
+
+            <div class="tb-share-bg-filters"></div>
 
             <div class="tb-card-footer">
                 <div class="tb-share-control-container">
+                    <div id="tb-search-tags"></div>
+                    <div>OR</div>
                     <input type="search" id="tb-txtsearch" name="txtsearch" placeholder="Search Background Image..." />
                     <button type="submit" id="tb-btnsearch">Search</button>
                     <div id="tb-bg-search-results">
