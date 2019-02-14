@@ -135,10 +135,6 @@ var backgroundImage = null;
 var panning = false;
 var orientation = 'horizontal';
 
-//$('.shareit').click(function () {
-console.log('Share Button Clicked');
-$('#tb-share-dialog').show();
-//});
 
 $(document).on('click', '.tb-share-dialog-close', function () {
     $('#tb-share-dialog').hide();
@@ -157,11 +153,16 @@ $("#btnResetZoom").click(function () {
     resetZoom();
 });
 
+// button Reset Zoom
+$("#btnSave").click(function () {
+    saveImage();
+});
+
 $(document).on('click', '.tb-search-items', function () {
     console.log('image clicked');
     var imageUrl = $(this).data('url');
     $.ajax({
-        url: 'tb-share-widget.php',
+        url: '../tb-share-widget.php',
         type: 'POST',
         data: {
             action: 'save-image',
@@ -199,7 +200,7 @@ $(document).on('click', '#tb-btnsearch', function () {
 function searchBackgrounds(searchTerm, searchTag, orientation) {
     console.log('Search it');
     $.ajax({
-        url: 'tb-share-widget.php',
+        url: '../tb-share-widget.php',
         type: 'POST',
         data: {
             action: 'search',
@@ -218,7 +219,7 @@ function searchBackgrounds(searchTerm, searchTag, orientation) {
                                 <a target="_blank" href="' +
                     item.pageURL +
                     '" class="tb-search-image-source-link">\n\
-                                <img class="tb-search-image-source"  src="pixabay.svg" /></a>\n\
+                                <img class="tb-search-image-source"  src="../pixabay.svg" /></a>\n\
                                 <img class="tb-search-image-preview" src="' +
                     item.previewURL +
                     '" />\n\

@@ -44,7 +44,7 @@ if ($action == 'search') {
     $complete_save_loc = $my_save_dir . $filename;
     file_put_contents($complete_save_loc, file_get_contents($imageurl));
     
-    $data = 'http://localhost/Products/ThoughtsBee/share-widget/'.$complete_save_loc;
+    $data = 'http://localhost/lab/share-widget/'.$complete_save_loc;
 
     $msg = 'save-image '.$imageurl;
     $status = true;

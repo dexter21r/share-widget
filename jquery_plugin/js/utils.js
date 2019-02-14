@@ -40,6 +40,10 @@ function checkAssetsLoading() {
     }
 }
 
+function saveImage() {
+    
+}
+
 // Zoom In
 function zoomIn() {
     // TODO limit the max canvas zoom in
